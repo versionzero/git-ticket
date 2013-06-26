@@ -12,7 +12,7 @@ def read(fname):
     except Exception:
         return ''
 
-install_requires = ['distribute', 'blessings', 'requests', 'rauth']
+install_requires = ['distribute', 'blessings', 'requests', 'rauth', 'oauth2', 'tlslite', 'jira-python']
 if sys.hexversion < 0x2070000:
     install_requires += ['argparse']
 setup(name="gitticket",

@@ -41,12 +41,14 @@ def parseconfig(doverify=True):
     config = {}
     # basic information
     config['name'] = gconfig.get('ticket.name', gconfig.get('user.name', None))
+    config['username'] = gconfig.get('ticket.username', gconfig.get('user.name', None))
     config['repo'] = gconfig.get('ticket.repo', None) or guess_repo_name()
-    from gitticket import github, bitbucket, redmine
+    from gitticket import github, bitbucket, redmine, jiracli
     config['service_name'] = gconfig.get('ticket.service', None) or guess_service()
     config['service'] = {'github':github,
                          'bitbucket':bitbucket,
                          'redmine':redmine,
+                         'jira':jiracli,
                          }.get(config['service_name'], None)
     # ssl
     config['sslverify'] = gconfig.get('http.sslVerify', 'true')
@@ -77,9 +79,9 @@ def parseconfig(doverify=True):
 def verify(cfg):
     """Check if configuration values are valid."""
     if not cfg['service_name']:
-        raise ValueError("Can't guess a service. Try 'git config ticket.service [github|bitbucket|redmine]'")
-    if cfg['service_name'] not in ('github', 'bitbucket', 'redmine'):
-        raise ValueError(u"{0} is a unknown service. You must choose a service from github, bitbucket, and redmine")
+        raise ValueError("Can't guess a service. Try 'git config ticket.service [github|bitbucket|redmine|jira]'")
+    if cfg['service_name'] not in ('github', 'bitbucket', 'redmine', 'jira'):
+        raise ValueError(u"{0} is a unknown service. You must choose a service from github, bitbucket, redmine, and jira")
     if not cfg['repo']:
         raise ValueError("Can't guess a repository name. Try 'git config ticket.repo <repository_name>'")
     # nameは何かしらあるだろうけど、gitのuser.nameが設定されていないという万一のことがある

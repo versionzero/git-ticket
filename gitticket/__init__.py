@@ -50,6 +50,9 @@ def main():
     psr_bitbucket_auth = subpsr.add_parser('bitbucket-authorize', help='')
     psr_bitbucket_auth.set_defaults(cmd=cmd.bitbucket_auth)
     #
+    psr_jira_auth = subpsr.add_parser('jira-authorize', help='')
+    psr_jira_auth.set_defaults(cmd=cmd.jira_auth)
+    #
     opts = psr.parse_args()
     dopts = {}
     for k, v in vars(opts).items():

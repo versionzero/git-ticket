@@ -107,6 +107,11 @@ def bitbucket_auth(opts):
     print 'git config --global ticket.bitbucket.token {0}'.format(r[0])
     print 'git config --global ticket.bitbucket.token-secret {0}'.format(r[1])
 
+def jira_auth(opts):
+    print 'For now, you should create a ~/.netrc file with the following:'
+    print '    machine <hostname> login <username> password <password>\n'
+    print 'For example,'
+    print '    machine jira.example.com login first.lastname password letmein'
 
 def show_config(opts):
     cfg = config.parseconfig(doverify=False)
